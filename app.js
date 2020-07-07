@@ -1,6 +1,7 @@
 const express = require('express');
 const fetch = require('node-fetch');
 const cheerio = require('cheerio');
+const slugify = require('slugify');
 
 const {ApolloServer} = require('apollo-server-express');
 const {importSchema} = require('graphql-import');
@@ -17,7 +18,8 @@ const server = new ApolloServer({
         API_URI,
         API_CITY_URI,
         fetch,
-        cheerio
+        cheerio,
+        slugify,
     },
     introspection: true,
     playground: true
@@ -29,7 +31,7 @@ app.get('/get/:city', async (req, res) => {
     var city = req.params.city;
 
     var datas = [];
-    await fetch(API_CITY_URI.replace('{0}', city))
+    await fetch(API_CITY_URI.replace('{0}', slugify(city)))
         .then(response => response.text())
         .then(body => {
             const $ = cheerio.load(body);
@@ -66,7 +68,7 @@ app.get('/get/:city/:town', async (req, res) => {
     var town = req.params.town;
 
     var datas = [];
-    await fetch(API_URI.replace('{0}', city).replace('{1}', town))
+    await fetch(API_URI.replace('{0}', slugify(city)).replace('{1}', slugify(town)))
         .then(response => response.text())
         .then(body => {
             const $ = cheerio.load(body);

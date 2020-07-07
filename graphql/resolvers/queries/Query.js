@@ -1,8 +1,8 @@
 const Query = {
-    getDutyPharmacy: async (parent, args, {API_URI, API_CITY_URI, fetch, cheerio}) => {
+    getDutyPharmacy: async (parent, args, {API_URI, API_CITY_URI, fetch, cheerio, slugify}) => {
         if (!args.town) {
             var datas = [];
-            await fetch(API_CITY_URI.replace('{0}', args.city))
+            await fetch(API_CITY_URI.replace('{0}', slugify(args.city)))
                 .then(response => response.text())
                 .then(body => {
                     const $ = cheerio.load(body);
@@ -34,7 +34,7 @@ const Query = {
             return datas;
         } else {
             var datas = [];
-            await fetch(API_URI.replace('{0}', args.city).replace('{1}', args.town))
+            await fetch(API_URI.replace('{0}', slugify(args.city)).replace('{1}', slugify(args.town)))
                 .then(response => response.text())
                 .then(body => {
                     const $ = cheerio.load(body);
