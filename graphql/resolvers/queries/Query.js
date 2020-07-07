@@ -10,7 +10,6 @@ const Query = {
                     $('figure').each(function (i, elem) {
                         datas[i] = {
                             city: args.city.charAt(0).toUpperCase() + args.city.slice(1),
-
                             town: $(this)
                                 .find('div[class=title] h3 a span')
                                 .text()
