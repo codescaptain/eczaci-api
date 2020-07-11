@@ -5,18 +5,16 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "start:dev": "nodemon --ext js,graphql app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "apollo-server-express": "^2.15.1",
+
     "cheerio": "^1.0.0-rc.3",
     "express": "^4.17.1",
-    "graphql": "^14.7.0",
-    "graphql-import": "^1.0.2",
+
     "node-fetch": "^2.6.0",
     "slugify": "^1.4.4"
   },

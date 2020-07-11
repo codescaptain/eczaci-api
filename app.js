@@ -3,27 +3,14 @@ const fetch = require('node-fetch');
 const cheerio = require('cheerio');
 const slugify = require('slugify');
 
-const {ApolloServer} = require('apollo-server-express');
-const {importSchema} = require('graphql-import');
 
-const resolvers = require('./graphql/resolvers/index');
+
+
 
 const API_URI = 'https://www.haberturk.com/nobetci-eczaneler/{0}/{1}';
 const API_CITY_URI = 'https://www.haberturk.com/nobetci-eczaneler/{0}';
 
-const server = new ApolloServer({
-    typeDefs: importSchema('./graphql/schema.graphql'),
-    resolvers,
-    context: {
-        API_URI,
-        API_CITY_URI,
-        fetch,
-        cheerio,
-        slugify,
-    },
-    introspection: true,
-    playground: true
-});
+
 
 const app = express();
 
@@ -101,14 +88,7 @@ app.get('/get/:city/:town', async (req, res) => {
     res.send(datas)
 })
 
-server.applyMiddleware({
-    app,
-    path: '/graphql',
-    cors: {
-        origin: true,
-        credentials: true
-    }
-})
+
 
 const port = process.env.PORT || 4000;
 
