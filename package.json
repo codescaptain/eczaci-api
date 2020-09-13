@@ -15,7 +15,7 @@
     "cheerio": "^1.0.0-rc.3",
     "express": "^4.17.1",
 
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "slugify": "^1.4.4"
   },
   "devDependencies": {
